@@ -32,9 +32,6 @@ namespace WindowsFormsApplication1
 
             v1.isUsed = true;
             v2.isUsed = true;
-
-            ver1.y += 20;
-            ver2.y += 20;
         }
     }
 
@@ -85,15 +82,17 @@ namespace WindowsFormsApplication1
 
             foreach (var edge in Edges)
             {
+                g.DrawLine(Pen, edge.ver1.x, edge.ver1.y, edge.ver2.x, edge.ver2.y);
 
+                g.FillEllipse(Brushes.White, new Rectangle(edge.ver1.x - R, edge.ver1.y - R, R * 2, R * 2)); // вынести отдельной функцией
                 g.DrawEllipse(edge.ver1.selected ? SelPen : Pen, new Rectangle(edge.ver1.x - R, edge.ver1.y - R, R*2, R*2));
                 g.DrawString(edge.ver1.Name, SystemFonts.DefaultFont, Brushes.Black, new PointF(edge.ver1.x - R / 2, edge.ver1.y - R / 2));
 
+                g.FillEllipse(Brushes.White, new Rectangle(edge.ver2.x - R, edge.ver2.y - R, R*2, R*2));
                 g.DrawEllipse(edge.ver2.selected ? SelPen : Pen, new Rectangle(edge.ver2.x - R, edge.ver2.y - R, R * 2, R * 2));
                 g.DrawString(edge.ver2.Name, SystemFonts.DefaultFont, Brushes.Black, new PointF(edge.ver2.x - R / 2, edge.ver2.y - R / 2));
 
-                Pen.EndCap = LineCap.ArrowAnchor;
-                g.DrawLine(Pen, edge.ver1.x, edge.ver1.y, edge.ver2.x, edge.ver2.y);
+             
 
             }
 

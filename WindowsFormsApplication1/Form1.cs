@@ -266,6 +266,7 @@ namespace WindowsFormsApplication1
 
         private void FillMnojestva()
         {
+            mnojestvoLB.Items.Clear();
             string[] mn = simmplFuncTB.Text.Split('V');
             foreach (var s in mn)
             {

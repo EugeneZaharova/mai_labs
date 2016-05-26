@@ -42,9 +42,10 @@
             // 
             // CreateButton
             // 
-            this.CreateButton.Location = new System.Drawing.Point(314, 10);
+            this.CreateButton.Location = new System.Drawing.Point(628, 19);
+            this.CreateButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.CreateButton.Name = "CreateButton";
-            this.CreateButton.Size = new System.Drawing.Size(68, 26);
+            this.CreateButton.Size = new System.Drawing.Size(136, 50);
             this.CreateButton.TabIndex = 0;
             this.CreateButton.Text = "Составь!";
             this.CreateButton.UseVisualStyleBackColor = true;
@@ -54,17 +55,19 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(3, 15);
+            this.label1.Location = new System.Drawing.Point(6, 29);
+            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(214, 16);
+            this.label1.Size = new System.Drawing.Size(398, 30);
             this.label1.TabIndex = 1;
             this.label1.Text = "Сколько вершин будет в графе:";
             // 
             // VerticInsertsNum
             // 
-            this.VerticInsertsNum.Location = new System.Drawing.Point(223, 15);
+            this.VerticInsertsNum.Location = new System.Drawing.Point(446, 29);
+            this.VerticInsertsNum.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.VerticInsertsNum.Name = "VerticInsertsNum";
-            this.VerticInsertsNum.Size = new System.Drawing.Size(64, 20);
+            this.VerticInsertsNum.Size = new System.Drawing.Size(128, 31);
             this.VerticInsertsNum.TabIndex = 2;
             // 
             // TableOfAdjacency
@@ -72,28 +75,35 @@
             this.TableOfAdjacency.AllowUserToAddRows = false;
             this.TableOfAdjacency.AllowUserToDeleteRows = false;
             this.TableOfAdjacency.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.TableOfAdjacency.Location = new System.Drawing.Point(12, 57);
+            this.TableOfAdjacency.Location = new System.Drawing.Point(24, 110);
+            this.TableOfAdjacency.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.TableOfAdjacency.Name = "TableOfAdjacency";
             this.TableOfAdjacency.RowHeadersWidth = 50;
-            this.TableOfAdjacency.Size = new System.Drawing.Size(281, 223);
+            this.TableOfAdjacency.Size = new System.Drawing.Size(562, 429);
             this.TableOfAdjacency.TabIndex = 3;
             this.TableOfAdjacency.CurrentCellChanged += new System.EventHandler(this.TableOfAdjacency_CurrentCellChanged);
+            this.TableOfAdjacency.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TableOfAdjacency_MouseClick);
             // 
             // GraphCanvas
             // 
             this.GraphCanvas.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.GraphCanvas.Location = new System.Drawing.Point(381, 57);
+            this.GraphCanvas.Location = new System.Drawing.Point(762, 110);
+            this.GraphCanvas.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.GraphCanvas.Name = "GraphCanvas";
-            this.GraphCanvas.Size = new System.Drawing.Size(599, 465);
+            this.GraphCanvas.Size = new System.Drawing.Size(1198, 894);
             this.GraphCanvas.TabIndex = 4;
             this.GraphCanvas.TabStop = false;
             this.GraphCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.GraphCanvas_Paint);
+            this.GraphCanvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GraphCanvas_MouseDown);
+            this.GraphCanvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.GraphCanvas_MouseMove);
+            this.GraphCanvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.GraphCanvas_MouseUp);
             // 
             // UnderSetFounder
             // 
-            this.UnderSetFounder.Location = new System.Drawing.Point(12, 301);
+            this.UnderSetFounder.Location = new System.Drawing.Point(24, 579);
+            this.UnderSetFounder.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.UnderSetFounder.Name = "UnderSetFounder";
-            this.UnderSetFounder.Size = new System.Drawing.Size(281, 51);
+            this.UnderSetFounder.Size = new System.Drawing.Size(562, 98);
             this.UnderSetFounder.TabIndex = 5;
             this.UnderSetFounder.Text = "Найди мне минимальные внешне устойчивые подмножества графа!";
             this.UnderSetFounder.UseVisualStyleBackColor = true;
@@ -101,16 +111,17 @@
             // 
             // resTB
             // 
-            this.resTB.Location = new System.Drawing.Point(13, 359);
+            this.resTB.Location = new System.Drawing.Point(26, 690);
+            this.resTB.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.resTB.Name = "resTB";
-            this.resTB.Size = new System.Drawing.Size(280, 20);
+            this.resTB.Size = new System.Drawing.Size(556, 31);
             this.resTB.TabIndex = 6;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1026, 534);
+            this.ClientSize = new System.Drawing.Size(2052, 1027);
             this.Controls.Add(this.resTB);
             this.Controls.Add(this.UnderSetFounder);
             this.Controls.Add(this.GraphCanvas);
@@ -118,6 +129,7 @@
             this.Controls.Add(this.VerticInsertsNum);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.CreateButton);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.VerticInsertsNum)).EndInit();

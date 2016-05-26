@@ -176,5 +176,60 @@ namespace WindowsFormsApplication1
 
             return res;
         }
+
+        Vertex current = null;
+        bool movemode = false;
+        int deltax = 0;
+        int prevx = 0;
+        int deltay = 0;
+        int prevy = 0;
+        private void GraphCanvas_MouseDown(object sender, MouseEventArgs e)
+        {
+            int R = 15;
+
+            var Vertexes = GRAPHS.Vertexes;
+            foreach (Vertex vertex in Vertexes)
+            {
+                var mouserec = new Rectangle(e.X - 1, e.Y -1, 2, 2);
+                var rec = new Rectangle(vertex.x - R, vertex.y - R, R * 2, R * 2);
+                if(rec.Contains(mouserec)) 
+                {
+                    current = vertex;
+                    movemode = true;
+                    deltax = 0;
+                    prevx = e.X;
+                    deltay = 0;
+                    prevy = e.Y;
+                    break;
+                }
+            }
+        }
+
+        private void GraphCanvas_MouseUp(object sender, MouseEventArgs e)
+        {
+            movemode = false;
+            current = null;
+        }
+
+        private void GraphCanvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!movemode) return;
+            if (current == null) return;
+
+            deltax = e.X - prevx;
+            deltay = e.Y - prevy;
+
+            prevx = e.X;
+            prevy = e.Y;
+
+            current.x += deltax;
+            current.y += deltay;
+
+            GraphCanvas.Invalidate();
+        }
+
+        private void TableOfAdjacency_MouseClick(object sender, MouseEventArgs e)
+        {
+        }
     }
 }

@@ -8,6 +8,33 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApplication1
 {
+    public class Vertex
+    {
+        public string Name;
+        public int x;
+        public int y;
+
+        public bool isUsed;
+    }
+
+    public class Edge
+    {
+        public Vertex ver1;
+        public Vertex ver2;
+
+        public Edge(Vertex v1, Vertex v2)
+        {
+            ver1 = v1;
+            ver2 = v2;
+
+            v1.isUsed = true;
+            v2.isUsed = true;
+
+            ver1.y += 20;
+            ver2.y += 20;
+        }
+    }
+
     class GraphOrlov
     {
         public List<Vertex> Vertexes = new List<Vertex>();
@@ -31,7 +58,7 @@ namespace WindowsFormsApplication1
                 }
                 else
                 {
-                    new_ver.x = Vertexes.Last().x + step;
+                    new_ver.x = Vertexes.Last().x + step / 2;
                     new_ver.y =  step/2;
                 }
 
@@ -60,36 +87,11 @@ namespace WindowsFormsApplication1
                 g.DrawEllipse(Pen, new Rectangle(edge.ver2.x - R, edge.ver2.y - R, R * 2, R * 2));
                 g.DrawString(edge.ver2.Name, SystemFonts.DefaultFont, Brushes.Black, new PointF(edge.ver2.x - R / 2, edge.ver2.y - R / 2));
 
+                Pen.EndCap = LineCap.ArrowAnchor;
                 g.DrawLine(Pen, edge.ver1.x, edge.ver1.y, edge.ver2.x, edge.ver2.y);
+                
 
             }
-        }
-    }
-
-    public class Vertex
-    {
-        public string Name;
-        public int x;
-        public int y;
-
-        public bool isUsed;
-    }
-
-    public class Edge
-    {
-        public Vertex ver1;
-        public Vertex ver2;
-
-        public Edge(Vertex v1, Vertex v2)
-        {
-            ver1 = v1;
-            ver2 = v2;
-
-            v1.isUsed = true;
-            v2.isUsed = true;
-
-            ver1.y += 20;
-            ver2.y += 20;
         }
     }
 }

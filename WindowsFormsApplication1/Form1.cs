@@ -116,16 +116,41 @@ namespace WindowsFormsApplication1
 
         }
 
+        private void FillDigonal(bool[,] m)
+        {
+            for (int i = 0; i < m.GetLength(0); i++)
+            {
+                m[i, i] = true;
+            }
+        }
+
+        private bool IsGraphRihgt(bool[,] m)
+        {
+            for (int i = 0; i < m.GetLength(0); i++)
+            {
+                int r = 0;
+                int c = 0;
+
+                for (int j = 0; j < m.GetLength(0); j++)
+                {
+                    if (m[i, j])
+                        ++c;
+                    if (m[j, i])
+                        ++r;
+                }
+
+                if (r == 1 && c == 1)
+                    return false;
+            }
+            return true;
+        }
 
         private string GetFunctionFromTable(bool[,] matrix)
         {
             string res="";
             var size = matrix.GetLength(0);
-            
-            for (int i = 0; i < size; i++) // вынести отдельной функцией
-            {
-                matrix[i, i] = true;
-            }
+
+            FillDigonal(matrix);
 
             for (int i = 0; i < size; i++)
             {
@@ -154,24 +179,9 @@ namespace WindowsFormsApplication1
                 res += ") & ";
             }
 
-            for (int i = 0; i < size; i++)
+            if (!IsGraphRihgt(matrix))
             {
-                int r = 0;
-                int c = 0;
-
-                for (int j = 0; j < size; j++)
-                {
-                    if (matrix[i, j])
-                        ++c;
-                    if (matrix[j, i])
-                        ++r;
-                }
-
-                if (r == 1 && c == 1)
-                {
-                    res = "Нет таких, т.к. существует вершина не принадлежащая графу";
-                    break;
-                }
+                res = "Нет таких, т.к. в графе есть непересекающиеся подмножетсва.";
             }
 
             return res;

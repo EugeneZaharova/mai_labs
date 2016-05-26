@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CRS.Core;
 
 namespace WindowsFormsApplication1
 {
@@ -18,11 +19,6 @@ namespace WindowsFormsApplication1
         }
 
         GraphOrlov GRAPHS;
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }       
 
         private void CreateButton_Click(object sender, EventArgs e)
         {
@@ -68,7 +64,6 @@ namespace WindowsFormsApplication1
 
         private void TableOfAdjacency_CurrentCellChanged(object sender, EventArgs e)
         {
-
             var value = TableOfAdjacency.Rows[TableOfAdjacency.CurrentCell.RowIndex].Cells[TableOfAdjacency.CurrentCell.ColumnIndex].Value;
             bool b = value != null && (bool)value;
 
@@ -187,12 +182,15 @@ namespace WindowsFormsApplication1
             return res;
         }
 
+        #region Перемещение вершин
+
         Vertex current = null;
         bool movemode = false;
         int deltax = 0;
         int prevx = 0;
         int deltay = 0;
         int prevy = 0;
+
         private void GraphCanvas_MouseDown(object sender, MouseEventArgs e)
         {
             int R = 15;
@@ -200,9 +198,9 @@ namespace WindowsFormsApplication1
             var Vertexes = GRAPHS.Vertexes;
             foreach (Vertex vertex in Vertexes)
             {
-                var mouserec = new Rectangle(e.X - 1, e.Y -1, 2, 2);
-                var rec = new Rectangle(vertex.x - R, vertex.y - R, R * 2, R * 2);
-                if(rec.Contains(mouserec)) 
+                var mouserec = new Rectangle(e.X - 1, e.Y - 1, 2, 2);
+                var rec = new Rectangle(vertex.x - R, vertex.y - R, R*2, R*2);
+                if (rec.Contains(mouserec))
                 {
                     current = vertex;
                     movemode = true;
@@ -238,8 +236,18 @@ namespace WindowsFormsApplication1
             GraphCanvas.Invalidate();
         }
 
+        #endregion
+
+
         private void TableOfAdjacency_MouseClick(object sender, MouseEventArgs e)
         {
+        }
+
+        private void simpleFunc_Click(object sender, EventArgs e)
+        {
+            if(resTB.Text == "") return;
+
+            simmplFuncTB.Text = LogicGateSimplifier.GetSLGTreeFromString(resTB.Text.Replace(" ", ""), true).func;
         }
     }
 }

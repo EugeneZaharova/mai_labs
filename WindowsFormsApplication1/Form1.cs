@@ -59,21 +59,26 @@ namespace WindowsFormsApplication1
 
         private void GraphCanvas_Paint(object sender, PaintEventArgs e)
         {
-            GRAPHS?.Render(e.Graphics); //хитровыебанная проверка на не нулл
+            if(GRAPHS != null)
+            GRAPHS.Render(e.Graphics); //хитровыебанная проверка на не нулл
         }
 
-        private void TableOfAdjacency_CurrentCellChanged(object sender, EventArgs e)
+        private void TableOfAdjacency_CellContentClick(object sender,
+            DataGridViewCellEventArgs e)
+        {
+            TableOfAdjacency.CommitEdit(DataGridViewDataErrorContexts.Commit);
+        }
+
+        /// <summary>
+        /// Works with the above.
+        /// </summary>
+        private void TableOfAdjacency_CellValueChanged(object sender,
+            DataGridViewCellEventArgs e)
         {
             if (TableOfAdjacency.CurrentCell == null)
                 return;
-            
-                var value = TableOfAdjacency.Rows[TableOfAdjacency.CurrentCell.RowIndex].Cells[TableOfAdjacency.CurrentCell.ColumnIndex].Value;
-                bool b = value != null && (bool)value;
 
-                if (b)
-                    return;
-            
-            
+            var value = TableOfAdjacency.Rows[TableOfAdjacency.CurrentCell.RowIndex].Cells[TableOfAdjacency.CurrentCell.ColumnIndex].Value;
 
             string name1 = TableOfAdjacency.Columns[TableOfAdjacency.CurrentCell.ColumnIndex].Name;
 
@@ -89,9 +94,29 @@ namespace WindowsFormsApplication1
             if (ver2 == null)
                 return;
 
-            GRAPHS.Edges.Add(new Edge(ver1, ver2));
-
+            if (!(bool)value)
+            {
+                Edge temp = null;
+                for (int i = 0; i < GRAPHS.Edges.Count; ++i )
+                {
+                    var t = GRAPHS.Edges[i];
+                    if (t.ver1 == ver1 && t.ver2 == ver2)
+                    {
+                        temp = t;
+                        break;
+                    }
+                }
+                if (temp != null)
+                {
+                    GRAPHS.Edges.Remove(temp);
+                }
+            }
+            else
+            {
+                GRAPHS.Edges.Add(new Edge(ver1, ver2));
+            }
             GraphCanvas.Invalidate();
+
         }
 
         private void UnderSetFounder_Click(object sender, EventArgs e)
@@ -242,11 +267,6 @@ namespace WindowsFormsApplication1
         }
 
         #endregion
-
-
-        private void TableOfAdjacency_MouseClick(object sender, MouseEventArgs e)
-        {
-        }
 
         private void simpleFunc_Click(object sender, EventArgs e)
         {

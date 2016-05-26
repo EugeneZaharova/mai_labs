@@ -44,6 +44,7 @@ namespace WindowsFormsApplication1
             g.SmoothingMode = SmoothingMode.HighQuality;
             int R = 15;
             var Pen = new Pen(Color.Black, 2);
+
             foreach (Vertex vertex in Vertexes.FindAll(v=>!v.isUsed))
             {
                 g.DrawEllipse(Pen, new Rectangle(vertex.x - R, vertex.y - R, R*2, R*2));

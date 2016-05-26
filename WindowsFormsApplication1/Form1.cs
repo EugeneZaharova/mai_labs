@@ -41,12 +41,9 @@ namespace WindowsFormsApplication1
         {
             TableOfAdjacency.Columns.Clear();
 
-            DataGridViewColumn column;
-            DataGridViewRow row;
-
             foreach (Vertex ver in GRAPHS.Vertexes)
             {
-                column = new DataGridViewCheckBoxColumn();
+                DataGridViewColumn column = new DataGridViewCheckBoxColumn();
                 column.Name = ver.Name;
 
                 TableOfAdjacency.Columns.Add(column);
@@ -54,7 +51,7 @@ namespace WindowsFormsApplication1
 
             foreach (Vertex ver in GRAPHS.Vertexes)
             {
-                row = new DataGridViewRow();
+                var row = new DataGridViewRow();
                 row.CreateCells(TableOfAdjacency);
                 row.HeaderCell.Value = ver.Name;
 
@@ -69,44 +66,28 @@ namespace WindowsFormsApplication1
             GRAPHS?.Render(e.Graphics); //хитровыебанная проверка на не нулл
         }
 
-        private void TableOfAdjacency_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            
-        }
-
-        private void TableOfAdjacency_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-           
-
-        }
-
-        private void TableOfAdjacency_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
-        {
-            
-        }
-
-        private void TableOfAdjacency_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void TableOfAdjacency_CurrentCellChanged(object sender, EventArgs e)
         {
 
             var value = TableOfAdjacency.Rows[TableOfAdjacency.CurrentCell.RowIndex].Cells[TableOfAdjacency.CurrentCell.ColumnIndex].Value;
             bool b = value != null && (bool)value;
 
-            if (b) return;
+            if (b)
+                return;
 
             string name1 = TableOfAdjacency.Columns[TableOfAdjacency.CurrentCell.ColumnIndex].Name;
 
             var ver1 = GRAPHS.Vertexes.FirstOrDefault(v => v.Name == name1);
-            if (ver1 == null) return;
+
+            if (ver1 == null)
+                return;
 
             string name2 = (string)TableOfAdjacency.Rows[TableOfAdjacency.CurrentCell.RowIndex].HeaderCell.Value;
 
             var ver2 = GRAPHS.Vertexes.FirstOrDefault(v => v.Name == name2);
-            if (ver2 == null) return;
+
+            if (ver2 == null)
+                return;
 
             GRAPHS.Edges.Add(new Edge(ver1, ver2));
 
@@ -170,8 +151,27 @@ namespace WindowsFormsApplication1
                     res += ')';
                     continue;
                 }
-
                 res += ") & ";
+            }
+
+            for (int i = 0; i < size; i++)
+            {
+                int r = 0;
+                int c = 0;
+
+                for (int j = 0; j < size; j++)
+                {
+                    if (matrix[i, j])
+                        ++c;
+                    if (matrix[j, i])
+                        ++r;
+                }
+
+                if (r == 1 && c == 1)
+                {
+                    res = "Нет таких, т.к. существует вершина не принадлежащая графу";
+                    break;
+                }
             }
 
             return res;

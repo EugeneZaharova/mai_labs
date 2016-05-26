@@ -77,10 +77,6 @@
             this.TableOfAdjacency.RowHeadersWidth = 50;
             this.TableOfAdjacency.Size = new System.Drawing.Size(281, 223);
             this.TableOfAdjacency.TabIndex = 3;
-            this.TableOfAdjacency.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.TableOfAdjacency_CellBeginEdit);
-            this.TableOfAdjacency.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.TableOfAdjacency_CellContentClick);
-            this.TableOfAdjacency.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.TableOfAdjacency_CellEndEdit);
-            this.TableOfAdjacency.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.TableOfAdjacency_CellValueChanged);
             this.TableOfAdjacency.CurrentCellChanged += new System.EventHandler(this.TableOfAdjacency_CurrentCellChanged);
             // 
             // GraphCanvas

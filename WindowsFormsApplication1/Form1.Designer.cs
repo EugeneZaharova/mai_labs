@@ -37,6 +37,8 @@
             this.resTB = new System.Windows.Forms.TextBox();
             this.simmplFuncTB = new System.Windows.Forms.TextBox();
             this.simpleFunc = new System.Windows.Forms.Button();
+            this.FoundUndersetsLabel = new System.Windows.Forms.Label();
+            this.mnojestvoLB = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.VerticInsertsNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TableOfAdjacency)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GraphCanvas)).BeginInit();
@@ -84,10 +86,13 @@
             // 
             // GraphCanvas
             // 
+            this.GraphCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.GraphCanvas.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.GraphCanvas.Location = new System.Drawing.Point(381, 57);
+            this.GraphCanvas.Location = new System.Drawing.Point(314, 57);
             this.GraphCanvas.Name = "GraphCanvas";
-            this.GraphCanvas.Size = new System.Drawing.Size(599, 465);
+            this.GraphCanvas.Size = new System.Drawing.Size(387, 534);
             this.GraphCanvas.TabIndex = 4;
             this.GraphCanvas.TabStop = false;
             this.GraphCanvas.Paint += new System.Windows.Forms.PaintEventHandler(this.GraphCanvas_Paint);
@@ -129,11 +134,31 @@
             this.simpleFunc.UseVisualStyleBackColor = true;
             this.simpleFunc.Click += new System.EventHandler(this.simpleFunc_Click);
             // 
+            // FoundUndersetsLabel
+            // 
+            this.FoundUndersetsLabel.AutoSize = true;
+            this.FoundUndersetsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.FoundUndersetsLabel.Location = new System.Drawing.Point(67, 440);
+            this.FoundUndersetsLabel.Name = "FoundUndersetsLabel";
+            this.FoundUndersetsLabel.Size = new System.Drawing.Size(0, 16);
+            this.FoundUndersetsLabel.TabIndex = 10;
+            // 
+            // mnojestvoLB
+            // 
+            this.mnojestvoLB.FormattingEnabled = true;
+            this.mnojestvoLB.Location = new System.Drawing.Point(13, 475);
+            this.mnojestvoLB.Name = "mnojestvoLB";
+            this.mnojestvoLB.Size = new System.Drawing.Size(274, 108);
+            this.mnojestvoLB.TabIndex = 11;
+            this.mnojestvoLB.SelectedIndexChanged += new System.EventHandler(this.mnojestvoLB_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(713, 458);
+            this.ClientSize = new System.Drawing.Size(713, 612);
+            this.Controls.Add(this.mnojestvoLB);
+            this.Controls.Add(this.FoundUndersetsLabel);
             this.Controls.Add(this.simpleFunc);
             this.Controls.Add(this.simmplFuncTB);
             this.Controls.Add(this.resTB);
@@ -164,6 +189,8 @@
         private System.Windows.Forms.TextBox resTB;
         private System.Windows.Forms.TextBox simmplFuncTB;
         private System.Windows.Forms.Button simpleFunc;
+        private System.Windows.Forms.Label FoundUndersetsLabel;
+        private System.Windows.Forms.ListBox mnojestvoLB;
     }
 }
 

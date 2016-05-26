@@ -64,11 +64,16 @@ namespace WindowsFormsApplication1
 
         private void TableOfAdjacency_CurrentCellChanged(object sender, EventArgs e)
         {
-            var value = TableOfAdjacency.Rows[TableOfAdjacency.CurrentCell.RowIndex].Cells[TableOfAdjacency.CurrentCell.ColumnIndex].Value;
-            bool b = value != null && (bool)value;
-
-            if (b)
+            if (TableOfAdjacency.CurrentCell == null)
                 return;
+            
+                var value = TableOfAdjacency.Rows[TableOfAdjacency.CurrentCell.RowIndex].Cells[TableOfAdjacency.CurrentCell.ColumnIndex].Value;
+                bool b = value != null && (bool)value;
+
+                if (b)
+                    return;
+            
+            
 
             string name1 = TableOfAdjacency.Columns[TableOfAdjacency.CurrentCell.ColumnIndex].Name;
 
@@ -245,9 +250,58 @@ namespace WindowsFormsApplication1
 
         private void simpleFunc_Click(object sender, EventArgs e)
         {
-            if(resTB.Text == "") return;
+            if (resTB.Text == "Нет таких, т.к. в графе есть непересекающиеся подмножетсва.")
+            {
+                simmplFuncTB.Text = "Чего упрощать-то?";
+                return;
 
-            simmplFuncTB.Text = LogicGateSimplifier.GetSLGTreeFromString(resTB.Text.Replace(" ", ""), true).func;
+            }
+            else                                  
+                simmplFuncTB.Text = LogicGateSimplifier.GetSLGTreeFromString(resTB.Text.Replace(" ", ""), true).func;
+
+            FoundUndersetsLabel.Text = "Найдено " + UndersetCount(simmplFuncTB.Text) + " подмножеств:";
+
+            FillMnojestva();
+        }
+
+        private void FillMnojestva()
+        {
+            string[] mn = simmplFuncTB.Text.Split('V');
+            foreach (var s in mn)
+            {
+                string[] vers = s.Replace("(","").Replace(")", "").Split('&');
+                string str = string.Join(",", vers);
+
+                mnojestvoLB.Items.Add("{" + str + "}");
+
+            }
+        }
+
+        private int UndersetCount(string s)
+        {
+            int Undersets = s.Count(e => e == 'V');
+
+            if (Undersets == 0 && s.Length == 0)
+                return 0;
+            if (Undersets == 0 && s.Length != 0)
+                return 1;
+
+            return Undersets + 1;
+        }
+
+        private void mnojestvoLB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string s = mnojestvoLB.SelectedItem.ToString();
+
+            foreach (var ver in GRAPHS.Vertexes)
+            {
+                ver.selected = false;
+
+                if (s.Contains(ver.Name))
+                    ver.selected = true;
+            }
+
+            GraphCanvas.Invalidate();
         }
     }
 }

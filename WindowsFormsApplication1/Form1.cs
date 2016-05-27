@@ -206,7 +206,7 @@ namespace WindowsFormsApplication1
 
             if (!IsGraphRihgt(matrix))
             {
-                res = "Нет таких, т.к. в графе есть непересекающиеся подмножетсва.";
+                res = "Свяжите все вершины!";
             }
 
             return res;
@@ -270,7 +270,7 @@ namespace WindowsFormsApplication1
 
         private void simpleFunc_Click(object sender, EventArgs e)
         {
-            if (resTB.Text == "Нет таких, т.к. в графе есть непересекающиеся подмножетсва.")
+            if (resTB.Text == "Свяжите все вершины!")
             {
                 simmplFuncTB.Text = "Чего упрощать-то?";
                 return;

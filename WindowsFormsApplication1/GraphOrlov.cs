@@ -84,8 +84,8 @@ namespace WindowsFormsApplication1
             {
                 //arrow
                 var arrowpen = Pen;
-                var ver1 = edge.ver1;
-                var ver2 = edge.ver2;
+                var ver1 = edge.ver2;
+                var ver2 = edge.ver1; // непонятно, аффтор немножка наложал
                 var r1 = 15;
                 var r2 = 20;
                 if ((ver2.x - ver1.x) == 0 && (ver2.y - ver1.y) == 0)
@@ -95,6 +95,10 @@ namespace WindowsFormsApplication1
                     r2 = 25;
                 }
                 double ugolstrelki = Math.Atan2(ver2.x - ver1.x, ver2.y - ver1.y);
+                double chetvertinochka = Math.Sqrt(Math.Pow((ver1.x - ver2.x), 2) + Math.Pow((ver1.y - ver2.y), 2)) / 5;
+
+                r1 = (int) chetvertinochka;
+
                 g.DrawLine(arrowpen, 
                     Convert.ToInt32(ver2.x + r1 * Math.Sin(ugolstrelki + 3.1516) + r2 * Math.Sin(ugolstrelki + 3.5)), 
                     Convert.ToInt32(ver2.y + r1 * Math.Cos(ugolstrelki + 3.1516) + r2 * Math.Cos(ugolstrelki + 3.5)),
